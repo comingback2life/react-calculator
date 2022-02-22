@@ -58,15 +58,22 @@ export const CalcButton = () => {
   }]
   const handleOnClick=(val)=>{
     const calcSymbols = ["/", "*", "-", "+"];
-    if(calcSymbols.includes(val) && addNumbers.includes(val)){
+    if(calcSymbols.includes(val) && addNumbers.includes(val) &&!addNumbers[0]===calcSymbols.includes(val)){
       return;
     }else{
-      addNumbers+=val
-      console.log(eval(addNumbers));
+      addNumbers=addNumbers+val
+      console.log(addNumbers)
+      
     }
     if(val==="C") console.log("Clear")
     if (val==="AC")  console.log("AC");
     if (val === "." && val.includes(".")) return;
+    if(val==="="){
+    let total=0;
+      total = addNumbers.slice(0,-1)
+      // total
+      console.log(eval(total));
+    }
   }
   return (
     
