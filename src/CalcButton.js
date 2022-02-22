@@ -1,4 +1,5 @@
 import React from 'react';
+import { DisplayBox } from './DisplayBox';
 let addNumbers = "";
 let flag = false;
 export const CalcButton = () => {
@@ -65,23 +66,20 @@ export const CalcButton = () => {
       if (addNumbers === "0" && val === "0" && addNumbers.length === 1) {
         return;
       } else {
-        
-        if (val === "." && (!addNumbers.length-1===undefined)&&(addNumbers[addNumbers.length-1]).includes(".")) console.log("first");
+
+        if (val === "." && (!addNumbers.length - 1 === undefined) && (addNumbers[addNumbers.length - 1]).includes(".")) console.log("first");
         addNumbers = addNumbers + val;
       }
     }
 
     if (val === "C") console.log("Clear");
     if (val === "AC") console.log("AC");
-   
+
     if (val === "=") {
-      let total = 0;
+      let total="0"; //initialising total
       total = addNumbers.slice(0, -1);
-      // total
-
-      console.log(eval(total));
-
-
+      console.log(eval(total))
+      
     }
   };
   return (
@@ -89,4 +87,5 @@ export const CalcButton = () => {
     // <button className={`btn ${myClass}`}>{text}</button>
     btns.map(btnList => <button key={btnList.key} className={btnList.key} onClick={() => handleOnClick(btnList.value)}>{btnList.value}</button>)
   );
+
 };
