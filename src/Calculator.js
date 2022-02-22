@@ -26,14 +26,40 @@ const btns =[ {
 },{
   key :'minus',
   value:'-'
-},,{
+},{
   key :'four',
   value:'4'
+},{
+  key :'five',
+  value:'5'
+},{
+  key :'six',
+  value:'6'
+},{
+  key :'plus',
+  value:'+'
+},{
+  key :'three',
+  value:'3'
+},{
+  key :'two',
+  value:'2'
+},{
+  key :'one',
+  value:'1'
+},{
+  key :'dot',
+  value:'.'
+},{
+  key :'zero',
+  value:'0'
+},{
+  key :'equalsSign',
+  value:'='
 }]
-
 export const Calculator = () => {
-const handleOnClick =(text)=>{
- const calcSymbols = ['+','-','*','/'];
+const handleOnClick =(key,value)=>{
+console.log(key,value);
 }
 
   return (
@@ -43,7 +69,7 @@ const handleOnClick =(text)=>{
       <div className="items">
       {
          
-         btns.map((todo)=> <CalcButton key={todo.key} text={todo.value} name={todo.key} onClick={()=>handleOnClick(todo.key,todo.value)}/>)
+         btns.map((todo)=> <CalcButton key={todo.key} text={todo.value} name={todo.key} onClick={()=>handleOnClick(todo.key,todo,todo.value)}/>)
        }
       </div>
     </div>
