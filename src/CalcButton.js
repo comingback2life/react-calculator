@@ -1,7 +1,8 @@
-import React from 'react';
+import {React,useState} from 'react';
 import { DisplayBox } from './DisplayBox';
 let addNumbers = "";
 let flag = false;
+let total="0";
 export const CalcButton = () => {
   const btns = [{
     key: 'clear',
@@ -78,14 +79,12 @@ export const CalcButton = () => {
     if (val === "=") {
       let total="0"; //initialising total
       total = addNumbers.slice(0, -1);
-      console.log(eval(total))
-      
+      total=eval(total);
     }
   };
   return (
-
-    // <button className={`btn ${myClass}`}>{text}</button>
     btns.map(btnList => <button key={btnList.key} className={btnList.key} onClick={() => handleOnClick(btnList.value)}>{btnList.value}</button>)
+    // <button className={`btn ${myClass}`}>{text}</button>
   );
 
 };
