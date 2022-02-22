@@ -1,5 +1,6 @@
 import React from 'react'
 let addNumbers="";
+let flag=false;
 export const CalcButton = () => {
   const btns =[ {
     key:'clear',
@@ -60,10 +61,13 @@ export const CalcButton = () => {
     const calcSymbols = ["/", "*", "-", "+"];
     if(calcSymbols.includes(val) && addNumbers.includes(val) &&!addNumbers[0]===calcSymbols.includes(val)){
       return;
-    }else{
-      addNumbers=addNumbers+val
-      console.log(addNumbers)
-      
+    }else{ //trying to bypass the octal literals error by checking if there is already a zero
+      if(addNumbers==="0" && val==="0" &&addNumbers.length===1){
+        return;
+      }else{
+        addNumbers=addNumbers+val;
+      }
+       
     }
     if(val==="C") console.log("Clear")
     if (val==="AC")  console.log("AC");
@@ -72,7 +76,8 @@ export const CalcButton = () => {
     let total=0;
       total = addNumbers.slice(0,-1)
       // total
-      console.log(eval(total));
+      
+   
     }
   }
   return (
