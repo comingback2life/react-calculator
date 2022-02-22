@@ -1,5 +1,5 @@
 import React from 'react'
-import { DisplayBox } from './DisplayBox'
+let addNumbers="";
 export const CalcButton = () => {
   const btns =[ {
     key:'clear',
@@ -56,8 +56,17 @@ export const CalcButton = () => {
     key :'equalsSign',
     value:'='
   }]
-  const handleOnClick=(value)=>{
- 
+  const handleOnClick=(val)=>{
+    const calcSymbols = ["/", "*", "-", "+"];
+    if(calcSymbols.includes(val) && addNumbers.includes(val)){
+      return;
+    }else{
+      addNumbers+=val
+      console.log(eval(addNumbers));
+    }
+    if(val==="C") console.log("Clear")
+    if (val==="AC")  console.log("AC");
+    if (val === "." && val.includes(".")) return;
   }
   return (
     
