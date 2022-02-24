@@ -1,7 +1,6 @@
 import {React,useState} from 'react';
-import { DisplayBox } from './DisplayBox';
 let addNumbers = "";
-export const CalcButton = ({testFunc}) => {
+export const CalcButton = ({displayFunc}) => {
   const btns = [{
     key: 'clear',
     value: 'AC'
@@ -59,27 +58,43 @@ export const CalcButton = ({testFunc}) => {
   }];
   const handleOnClick = (val) => {
     const calcSymbols = ["/", "*", "-", "+"];
+
+
+
     if (calcSymbols.includes(val) && addNumbers.includes(val) && !addNumbers[0] === calcSymbols.includes(val)) {
       return;
     } else { //trying to bypass the octal literals error by checking if there is already a zero
       if (addNumbers === "0" && val === "0" && addNumbers.length === 1) {
         return;
       } else {
-        if (val === "." && (!addNumbers.length - 1 === undefined) && (addNumbers[addNumbers.length - 1]).includes(".")) console.log("first");
+        if (val === "." && (!addNumbers.length === undefined) && (addNumbers.length - 1).includes(".")) return;
         addNumbers = addNumbers + val;
+       displayFunc(addNumbers)
       }
     }
-
-    if (val === "C") ;
-    if (val === "AC") testFunc(0);
-
     if (val === "=") {
-      let total="0"; //initialising total
+      let total=""; //initialising total
       total = addNumbers.slice(0, -1);
       total=eval(total);
-      testFunc(total);
+      displayFunc(total);
+      return;
     }
+    if (val === "C"){
+      addNumbers=addNumbers.slice(0,-2);
+      if(addNumbers===0){
+        console.log("zero");
+      }
+      displayFunc(addNumbers)
+      return addNumbers;
+    } ;
+    if (val === "AC"){
+      addNumbers="";
+      displayFunc(0);
+    } 
+  
+
   };
+  
   return (
     btns.map(btnList => <button key={btnList.key} className={btnList.key} onClick={() => handleOnClick(btnList.value)}>{btnList.value}</button>)
     // <button className={`btn ${myClass}`}>{text}</button>

@@ -6,14 +6,14 @@ export const Calculator = () => {
   const [value,setValue]=useState(0);
 
 
-   const test=(val)=>{
+   const displayText=(val)=>{
      setValue(val);
    }
   return (
     <div className="mainParent">
       <DisplayBox value={value}/>
       <div className="items">
-        <CalcButton testFunc={test} />
+        <CalcButton displayFunc={displayText} />
       </div>
     </div>
   )
