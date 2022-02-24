@@ -1,9 +1,7 @@
 import {React,useState} from 'react';
 import { DisplayBox } from './DisplayBox';
 let addNumbers = "";
-let flag = false;
-let total="0";
-export const CalcButton = () => {
+export const CalcButton = ({testFunc}) => {
   const btns = [{
     key: 'clear',
     value: 'AC'
@@ -67,19 +65,19 @@ export const CalcButton = () => {
       if (addNumbers === "0" && val === "0" && addNumbers.length === 1) {
         return;
       } else {
-
         if (val === "." && (!addNumbers.length - 1 === undefined) && (addNumbers[addNumbers.length - 1]).includes(".")) console.log("first");
         addNumbers = addNumbers + val;
       }
     }
 
-    if (val === "C") console.log("Clear");
-    if (val === "AC") console.log("AC");
+    if (val === "C") ;
+    if (val === "AC") testFunc(0);
 
     if (val === "=") {
       let total="0"; //initialising total
       total = addNumbers.slice(0, -1);
       total=eval(total);
+      testFunc(total);
     }
   };
   return (
