@@ -58,12 +58,15 @@ const calcSymbols = ['+','-','*','/'];
 let total ="";
 export const CalcButton = ({displayFunc}) => {
   const handleOnClick=(btnValue)=>{
+    if(btnValue=== "." && total.includes('.')){
+      return;
+    }
     if(total.length<1 && calcSymbols.includes(btnValue)) return;
-    total=total.concat(btnValue);
-    displayFunc(total);
-    if(btnValue==="="){      
+     total=total.concat(btnValue);  
+     displayFunc(total);
+    if(btnValue==="="){    
       if(!total.length) return;
-      if(calcSymbols.includes(total[total.length-1])){
+      if(calcSymbols.includes(total[total.length-1]) && total.includes(calcSymbols)){
         total=total.slice(0,-1);
       }
       total=total.slice(0,-1);
@@ -71,9 +74,14 @@ export const CalcButton = ({displayFunc}) => {
       return;
     }
     if(btnValue==="C"){
+      total=total.slice(0,-2);
+      return displayFunc(total);
+   
+    }
+    if (btnValue==="AC"){
       displayFunc(0);
     }
-    
+   
   }
   const calculateTotal=()=>{
     try{
