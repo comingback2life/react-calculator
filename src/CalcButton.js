@@ -1,8 +1,4 @@
-import {React,useState} from 'react';
-
-let addNumbers = "";
-const calcSymbols = ["/", "*", "-", "+"];
-
+import React from 'react'
 const btns = [{
   key: 'clear',
   value: 'AC'
@@ -58,55 +54,32 @@ const btns = [{
   key: 'equalsSign',
   value: '='
 }];
-
-export const CalcButton = ({displayFunc}) => {
-
-  const handleOnClick = (val) => {
+const calcSymbols = ['+','-','*','/'];
+let total ="";
+export const CalcButton = () => {
+  const handleOnClick=(btnValue)=>{
+    total=total.concat(btnValue);
+    if(total.length <1 && calcSymbols.includes(btnValue)){
+      return;
+    }
+    if(btnValue==="="){
+      if(!total.length) return;
+      total=total.slice(0,-1);
+     calculateTotal(total);
+      return;
+    }
+  }
+  const calculateTotal=(btnValue)=>{
+    try{
+     total=eval(total);
+     console.log(total)
+    }catch(e){
+      console.log(total,e)
+    }
+ 
     
-
-
-
-    if (calcSymbols.includes(val) && addNumbers.includes(val) && !addNumbers[0] === calcSymbols.includes(val)) {
-      return;
-    } else { //trying to bypass the octal literals error by checking if there is already a zero
-      if (addNumbers === "0" && val === "0" && addNumbers.length === 1) {
-        return;
-      } else {
-        if (val === "." && (!addNumbers.length === undefined) && (addNumbers.length - 1).includes(".")) return;
-        if(val==="=" && addNumbers.length===0){
-          return;
-        }else{
-          addNumbers = addNumbers + val;
-          displayFunc(addNumbers);
-        }
-      }
-    }
-    if (val === "=") {
-      let total=""; //initialising total
-      total = addNumbers.slice(0, -1);
-      total=eval(total);
-      addNumbers=total.toString();
-      displayFunc(total);
-      return;
-     
-     
-    }
-    if (val === "C"){
-      addNumbers=addNumbers.slice(0,-2);
-      displayFunc(0)
-      return addNumbers;
-    } ;
-    if (val === "AC"){
-      addNumbers="";
-      displayFunc(0);
-    } 
-  
-
-  };
-  
+  }
   return (
-    btns.map(btnList => <button key={btnList.key} className={btnList.key} onClick={() => handleOnClick(btnList.value)}>{btnList.value}</button>)
-    // <button className={`btn ${myClass}`}>{text}</button>
-  );
-
-};
+   btns.map(btnList => <button key={btnList.key} className={btnList.key} onClick={()=>handleOnClick(btnList.value)}>{btnList.value}</button>) 
+  )
+}
