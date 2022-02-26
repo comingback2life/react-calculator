@@ -56,23 +56,30 @@ const btns = [{
 }];
 const calcSymbols = ['+','-','*','/'];
 let total ="";
-export const CalcButton = () => {
+export const CalcButton = ({displayFunc}) => {
   const handleOnClick=(btnValue)=>{
+    if(total.length<1 && calcSymbols.includes(btnValue)) return;
     total=total.concat(btnValue);
-    if(total.length <1 && calcSymbols.includes(btnValue)){
-      return;
-    }
-    if(btnValue==="="){
+    displayFunc(total);
+    if(btnValue==="="){      
       if(!total.length) return;
+      if(calcSymbols.includes(total[total.length-1])){
+        total=total.slice(0,-1);
+      }
       total=total.slice(0,-1);
-     calculateTotal(total);
+      calculateTotal(total);
       return;
     }
+    if(btnValue==="C"){
+      displayFunc(0);
+    }
+    
   }
-  const calculateTotal=(btnValue)=>{
+  const calculateTotal=()=>{
     try{
      total=eval(total);
-     console.log(total)
+      displayFunc(total);
+      total=""; // wiping out total so that it matches above conditions
     }catch(e){
       console.log(total,e)
     }
