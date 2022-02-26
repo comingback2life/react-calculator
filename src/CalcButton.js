@@ -72,8 +72,11 @@ export const CalcButton = ({displayFunc}) => {
     }
     if(btnValue==="C"){
       total=total.slice(0,-1);
-      return displayFunc(total);
-   
+      if(total.length){
+        return displayFunc(total);
+      }else{
+        return displayFunc(0)
+      }
     }
     if (btnValue==="AC"){
       displayFunc(0);
@@ -87,7 +90,7 @@ export const CalcButton = ({displayFunc}) => {
       displayFunc(total);
       total=""; // wiping out total so that it matches above conditions
     }catch(e){
-      console.log(total,e)
+     return;
     }
  
     
