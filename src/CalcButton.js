@@ -61,36 +61,25 @@ export const CalcButton = ({displayFunc}) => {
     if(btnValue=== "." && total.includes('.')){
       return;
     }
-  
     if(total.length<1 && calcSymbols.includes(btnValue)) return;
-    total=total.concat(btnValue);  
-     displayFunc(total);
     if(btnValue==="="){    
-      if(!total.length || (total.length===1 && total.includes('='))) {
-        total=""
-        return displayFunc(0)
-      }
-      console.log(calcSymbols.includes(total[total.length-1]))
-      if(calcSymbols.includes(total[total.length-1]) && total.includes(calcSymbols)){
+      if(!total.length) return displayFunc(0)
+      if(calcSymbols.includes(total[total.length-1])){
         total=total.slice(0,-1);
       }
-      total=total.slice(0,-1);
       calculateTotal(total);
       return;
     }
     if(btnValue==="C"){
-      
-      // if(calcSymbols.includes(total[total.length-1])){
-      //   total=total.slice(0,-1);
-      // }
-      total=total.slice(0,-2);
+      total=total.slice(0,-1);
       return displayFunc(total);
    
     }
     if (btnValue==="AC"){
       displayFunc(0);
     }
-   
+    total=total.concat(btnValue);  
+    displayFunc(total);
   }
   const calculateTotal=()=>{
     try{
