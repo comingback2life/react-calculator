@@ -63,8 +63,8 @@ export const CalcButton = ({displayFunc}) => {
     }
     if(total.length<1 && calcSymbols.includes(btnValue)) return;
     if(btnValue==="="){    
-      if(!total.length) return displayFunc(0)
-      if(calcSymbols.includes(total[total.length-1])){
+      if(!total.length) return displayFunc(0) //if total is empty at any instance
+      if(calcSymbols.includes(total[total.length-1])){ //remove the calcSymbol
         total=total.slice(0,-1);
       }
       calculateTotal(total);
@@ -75,14 +75,14 @@ export const CalcButton = ({displayFunc}) => {
       if(total.length){
         return displayFunc(total);
       }else{
-        return displayFunc(0)
+        return displayFunc(0) //if user clears everything return 0 to the display reader.
       }
     }
     if (btnValue==="AC"){
       displayFunc(0);
     }
     total=total.concat(btnValue);  
-    displayFunc(total);
+    displayFunc(total); //passing value to displayFunc to display the number on screen
   }
   const calculateTotal=()=>{
     try{
